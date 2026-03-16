@@ -14,8 +14,8 @@
  * limitations under the License.
  */
 
-import { defineConfig } from '@playwright/test';
 import { generateProjects } from '@backstage/e2e-test-utils/playwright';
+import { defineConfig } from '@playwright/test';
 
 /**
  * See https://playwright.dev/docs/test-configuration.

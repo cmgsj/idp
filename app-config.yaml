@@ -17,11 +17,14 @@ app:
         config:
           path: /
 
-
 organization:
   name: My Company
 
 backend:
+  actions:
+    pluginSources:
+      - 'catalog'
+      - 'greet'
   # Used for enabling authentication, secret is shared by all backend plugins
   # See https://backstage.io/docs/auth/service-to-service-auth for
   # information on the format
@@ -38,7 +41,9 @@ backend:
     # Content-Security-Policy directives follow the Helmet format: https://helmetjs.github.io/#reference
     # Default Helmet Content-Security-Policy values can be removed by setting the key to false
   cors:
-    origin: http://localhost:3000
+    origins:
+      - http://localhost:3000
+      - http://localhost:6274
     methods: [GET, HEAD, PATCH, POST, PUT, DELETE]
     credentials: true
   # This is for local development only, it is not recommended to use this in production
@@ -46,6 +51,8 @@ backend:
   database:
     client: better-sqlite3
     connection: ':memory:'
+    # connection:
+    #   directory: '../../.cache/db'
   # workingDirectory: /tmp # Use this to configure a working directory for the scaffolder, defaults to the OS temp-dir
 
 integrations:
@@ -79,10 +86,21 @@ techdocs:
     type: 'local' # Alternatives - 'googleGcs' or 'awsS3'. Read documentation for using alternatives.
 
 auth:
+  environment: development
   # see https://backstage.io/docs/auth/ to learn about auth providers
   providers:
     # See https://backstage.io/docs/auth/guest/provider
-    guest: {}
+    # guest: {}
+    github:
+      development:
+        clientId: ${AUTH_GITHUB_CLIENT_ID}
+        clientSecret: ${AUTH_GITHUB_CLIENT_SECRET}
+        signIn:
+          resolvers:
+            # See https://backstage.io/docs/auth/github/provider#resolvers for more resolvers
+            - resolver: usernameMatchingUserEntityName
+  experimentalDynamicClientRegistration:
+    enabled: true
 
 scaffolder:
   # see https://backstage.io/docs/features/software-templates/configuration for software template options
@@ -110,15 +128,15 @@ catalog:
       rules:
         - allow: [User, Group]
 
-    ## Uncomment these lines to add more example data
-    # - type: url
-    #   target: https://github.com/backstage/backstage/blob/master/packages/catalog-model/examples/all.yaml
+    # Uncomment these lines to add more example data
+    - type: url
+      target: https://github.com/backstage/backstage/blob/master/packages/catalog-model/examples/all.yaml
 
-    ## Uncomment these lines to add an example org
-    # - type: url
-    #   target: https://github.com/backstage/backstage/blob/master/packages/catalog-model/examples/acme-corp.yaml
-    #   rules:
-    #     - allow: [User, Group]
+    # Uncomment these lines to add an example org
+    - type: url
+      target: https://github.com/backstage/backstage/blob/master/packages/catalog-model/examples/acme-corp.yaml
+      rules:
+        - allow: [User, Group]
 
 kubernetes:
   # see https://backstage.io/docs/features/kubernetes/configuration for kubernetes configuration options

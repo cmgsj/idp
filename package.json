@@ -20,6 +20,10 @@
     "lint": "backstage-cli repo lint --since origin/main",
     "lint:all": "backstage-cli repo lint",
     "prettier:check": "prettier --check .",
+    "biome:format": "biome format --write .",
+    "biome:lint": "biome lint --write .",
+    "biome:check": "biome check --write .",
+    "mcp": "mcp-inspector --config mcp.json",
     "new": "backstage-cli new"
   },
   "backstage": {
@@ -53,11 +57,15 @@
   "devDependencies": {
     "@backstage/cli": "^0.35.4",
     "@backstage/e2e-test-utils": "^0.1.2",
+    "@biomejs/biome": "2.4.7",
     "@jest/environment-jsdom-abstract": "^30.0.0",
+    "@modelcontextprotocol/inspector": "^0.21.1",
     "@playwright/test": "^1.32.3",
     "@types/jest": "^30.0.0",
+    "commander": "^14.0.3",
     "jest": "^30.2.0",
     "jsdom": "^27.1.0",
+    "mcp-remote": "^0.1.38",
     "node-gyp": "^10.0.0",
     "prettier": "^2.3.2",
     "typescript": "~5.8.0"
