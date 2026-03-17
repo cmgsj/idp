@@ -7,6 +7,7 @@ import {
 import { SignInPageBlueprint } from '@backstage/plugin-app-react';
 import authPlugin from '@backstage/plugin-auth';
 import catalogPlugin from '@backstage/plugin-catalog/alpha';
+import mcpChatPlugin from '@backstage-community/plugin-mcp-chat/alpha';
 import { navModule } from './modules/nav';
 
 const signInPage = SignInPageBlueprint.make({
@@ -30,6 +31,7 @@ export default createApp({
   features: [
     authPlugin,
     catalogPlugin,
+    mcpChatPlugin,
     navModule,
     createFrontendModule({
       pluginId: 'app',

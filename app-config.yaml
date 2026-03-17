@@ -21,6 +21,18 @@ organization:
   name: My Company
 
 backend:
+  auth:
+    externalAccess:
+      - type: static
+        options:
+          token: ${MCP_TOKEN}
+          subject: mcp-clients
+        accessRestrictions:
+          - plugin: mcp-actions
+          - plugin: auth
+          - plugin: catalog
+          - plugin: scaffolder
+          - plugin: core-actions
   actions:
     pluginSources:
       - 'auth'
@@ -52,9 +64,9 @@ backend:
   # The production database configuration is stored in app-config.production.yaml
   database:
     client: better-sqlite3
-    connection: ':memory:'
-    # connection:
-    #   directory: '../../.cache/db'
+    # connection: ':memory:'
+    connection:
+      directory: '../../.cache/db'
   # workingDirectory: /tmp # Use this to configure a working directory for the scaffolder, defaults to the OS temp-dir
 
 integrations:
@@ -147,3 +159,29 @@ kubernetes:
 permission:
   # setting this to `false` will disable permissions
   enabled: true
+
+mcpChat:
+  providers:
+    - id: gemini 
+      token: ${MCP_CHAT_GEMINI_API_KEY}
+      model: gemini-2.5-flash 
+
+  mcpServers:
+    - id: backstage-server
+      name: Backstage Server
+      url: 'http://localhost:7007/api/mcp-actions/v1'
+      headers:
+        Authorization: 'Bearer ${MCP_TOKEN}'
+
+  systemPrompt: "You are a helpful assistant. When using tools, provide a clear, readable summary of the results rather than showing raw data. Focus on answering the user's question with the information gathered."
+
+  quickPrompts:
+    - title: 'Search Latest Tech News'
+      description: 'Find the latest technology news and developments'
+      prompt: 'Search for the latest developments in Model Context Protocol and its applications'
+      category: Research
+
+    - title: 'Backstage Catalog Query'
+      description: 'Query the Backstage software catalog'
+      prompt: 'Describe the "example-app" microservice in our Backstage catalog'
+      category: Catalog

@@ -14,6 +14,7 @@
     "lint": "backstage-cli package lint"
   },
   "dependencies": {
+    "@backstage-community/plugin-mcp-chat": "patch:@backstage-community/plugin-mcp-chat@npm%3A0.4.0#~/.yarn/patches/@backstage-community-plugin-mcp-chat-npm-0.4.0-a230f75457.patch",
     "@backstage/cli": "^0.35.4",
     "@backstage/core-compat-api": "^0.5.8",
     "@backstage/core-components": "^0.18.7",
