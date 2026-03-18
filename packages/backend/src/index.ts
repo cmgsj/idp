@@ -56,6 +56,9 @@ backend.add(import('@backstage/plugin-search-backend-module-pg'));
 // search collators
 backend.add(import('@backstage/plugin-search-backend-module-catalog'));
 backend.add(import('@backstage/plugin-search-backend-module-techdocs'));
+backend.add(
+  import('@backstage-community/plugin-search-backend-module-announcements'),
+);
 
 // kubernetes plugin
 backend.add(import('@backstage/plugin-kubernetes-backend'));
@@ -64,10 +67,13 @@ backend.add(import('@backstage/plugin-kubernetes-backend'));
 backend.add(import('@backstage/plugin-notifications-backend'));
 backend.add(import('@backstage/plugin-signals-backend'));
 
-// mcp actions
+// mcp actions plugin
 backend.add(import('@backstage/plugin-mcp-actions-backend'));
 
-// mcp chat
+// mcp chat plugin
 backend.add(import('@backstage-community/plugin-mcp-chat-backend'));
+
+// announcements plugin
+backend.add(import('@backstage-community/plugin-announcements-backend'));
 
 backend.start();
