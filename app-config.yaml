@@ -8,9 +8,9 @@ app:
   extensions:
     # Disable the nav items that we're manually rendering in packages/app/src/modules/nav/Sidebar.tsx
     - nav-item:search: false
+    - nav-item:user-settings: false
     - nav-item:catalog: false
     - nav-item:scaffolder: false
-    - nav-item:user-settings: false
 
     # Configure the catalog index page to be the root page, this is normally mounted on /catalog
     - page:catalog:
@@ -53,7 +53,7 @@ backend:
     # Content-Security-Policy directives follow the Helmet format: https://helmetjs.github.io/#reference
     # Default Helmet Content-Security-Policy values can be removed by setting the key to false
   cors:
-    origins:
+    origin:
       - http://localhost:3000
       - http://localhost:6274
     methods: [GET, HEAD, PATCH, POST, PUT, DELETE]
@@ -113,6 +113,8 @@ auth:
             - resolver: usernameMatchingUserEntityName
   experimentalDynamicClientRegistration:
     enabled: true
+  experimentalClientIdMetadataDocuments:
+    enabled: true
 
 scaffolder:
   # see https://backstage.io/docs/features/software-templates/configuration for software template options
@@ -140,15 +142,15 @@ catalog:
       rules:
         - allow: [User, Group]
 
-    # Uncomment these lines to add more example data
-    - type: url
-      target: https://github.com/backstage/backstage/blob/master/packages/catalog-model/examples/all.yaml
+    ## Uncomment these lines to add more example data
+    # - type: url
+    #   target: https://github.com/backstage/backstage/blob/master/packages/catalog-model/examples/all.yaml
 
-    # Uncomment these lines to add an example org
-    - type: url
-      target: https://github.com/backstage/backstage/blob/master/packages/catalog-model/examples/acme-corp.yaml
-      rules:
-        - allow: [User, Group]
+    ## Uncomment these lines to add an example org
+    # - type: url
+    #   target: https://github.com/backstage/backstage/blob/master/packages/catalog-model/examples/acme-corp.yaml
+    #   rules:
+    #     - allow: [User, Group]
 
 kubernetes:
   # see https://backstage.io/docs/features/kubernetes/configuration for kubernetes configuration options
