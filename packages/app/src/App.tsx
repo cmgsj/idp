@@ -1,41 +1,7 @@
-import { SignInPage } from '@backstage/core-components';
 import { createApp } from '@backstage/frontend-defaults';
-import {
-  createFrontendModule,
-  githubAuthApiRef,
-} from '@backstage/frontend-plugin-api';
-import { SignInPageBlueprint } from '@backstage/plugin-app-react';
-import authPlugin from '@backstage/plugin-auth';
-import catalogPlugin from '@backstage/plugin-catalog/alpha';
-import mcpChatPlugin from '@backstage-community/plugin-mcp-chat/alpha';
 import { navModule } from './modules/nav';
-
-const signInPage = SignInPageBlueprint.make({
-  params: {
-    loader: async () => (props) => (
-      <SignInPage
-        {...props}
-        auto
-        provider={{
-          id: 'github-auth-provider',
-          title: 'GitHub',
-          message: 'Sign in using GitHub',
-          apiRef: githubAuthApiRef,
-        }}
-      />
-    ),
-  },
-});
+import { signInModule } from './modules/signin';
 
 export default createApp({
-  features: [
-    authPlugin,
-    catalogPlugin,
-    mcpChatPlugin,
-    navModule,
-    createFrontendModule({
-      pluginId: 'app',
-      extensions: [signInPage],
-    }),
-  ],
+  features: [signInModule, navModule],
 });

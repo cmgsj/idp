@@ -8,9 +8,9 @@ app:
   extensions:
     # Disable the nav items that we're manually rendering in packages/app/src/modules/nav/Sidebar.tsx
     - nav-item:search: false
-    - nav-item:user-settings: false
     - nav-item:catalog: false
     - nav-item:scaffolder: false
+    - nav-item:user-settings: false
 
     # Configure the catalog index page to be the root page, this is normally mounted on /catalog
     - page:catalog:
@@ -32,13 +32,11 @@ backend:
           - plugin: auth
           - plugin: catalog
           - plugin: scaffolder
-          - plugin: core-actions
   actions:
     pluginSources:
       - 'auth'
       - 'catalog'
       - 'scaffolder'
-      - 'core-actions'
   # Used for enabling authentication, secret is shared by all backend plugins
   # See https://backstage.io/docs/auth/service-to-service-auth for
   # information on the format

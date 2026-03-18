@@ -66,7 +66,6 @@ backend.add(import('@backstage/plugin-signals-backend'));
 
 // mcp actions
 backend.add(import('@backstage/plugin-mcp-actions-backend'));
-backend.add(import('@internal/backstage-plugin-core-actions-backend'));
 
 // mcp chat
 backend.add(import('@backstage-community/plugin-mcp-chat-backend'));
