@@ -1,4 +1,3 @@
-import { compatWrapper } from '@backstage/core-compat-api';
 import {
   Sidebar,
   SidebarDivider,
@@ -10,10 +9,7 @@ import {
 import { NavContentBlueprint } from '@backstage/plugin-app-react';
 import { NotificationsSidebarItem } from '@backstage/plugin-notifications';
 import { SidebarSearchModal } from '@backstage/plugin-search';
-import {
-  Settings as SidebarSettings,
-  UserSettingsSignInAvatar,
-} from '@backstage/plugin-user-settings';
+import { UserSettingsSignInAvatar } from '@backstage/plugin-user-settings';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import { SidebarLogo } from './SidebarLogo';
@@ -24,10 +20,11 @@ export const SidebarContent = NavContentBlueprint.make({
       const nav = navItems.withComponent((item) => (
         <SidebarItem icon={() => item.icon} to={item.href} text={item.title} />
       ));
+
       // Skipped items
-      nav.take('page:search');
-      nav.take('page:user-settings');
-      return compatWrapper(
+      nav.take('page:search'); // Using search modal instead
+
+      return (
         <Sidebar>
           <SidebarLogo />
           <SidebarGroup label="Search" icon={<SearchIcon />} to="/search">
@@ -51,9 +48,10 @@ export const SidebarContent = NavContentBlueprint.make({
             icon={<UserSettingsSignInAvatar />}
             to="/settings"
           >
-            <SidebarSettings />
+            {nav.take('page:app-visualizer')}
+            {nav.take('page:user-settings')}
           </SidebarGroup>
-        </Sidebar>,
+        </Sidebar>
       );
     },
   },

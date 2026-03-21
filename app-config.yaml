@@ -6,12 +6,6 @@ app:
   packages: all
 
   extensions:
-    # Disable the nav items that we're manually rendering in packages/app/src/modules/nav/Sidebar.tsx
-    - nav-item:search: false
-    - nav-item:user-settings: false
-    - nav-item:catalog: false
-    - nav-item:scaffolder: false
-
     # Configure the catalog index page to be the root page, this is normally mounted on /catalog
     - page:catalog:
         config:
@@ -111,6 +105,8 @@ auth:
           resolvers:
             # See https://backstage.io/docs/auth/github/provider#resolvers for more resolvers
             - resolver: usernameMatchingUserEntityName
+  experimentalRefreshToken:
+    enabled: true
   experimentalDynamicClientRegistration:
     enabled: true
   experimentalClientIdMetadataDocuments:
@@ -160,11 +156,14 @@ permission:
   # setting this to `false` will disable permissions
   enabled: true
 
+mcpActions:
+  namespacedToolNames: false
+
 mcpChat:
   providers:
-    - id: gemini 
+    - id: gemini
       token: ${MCP_CHAT_GEMINI_API_KEY}
-      model: gemini-2.5-flash 
+      model: gemini-2.5-flash
 
   mcpServers:
     - id: backstage-server
@@ -185,3 +184,8 @@ mcpChat:
       description: 'Query the Backstage software catalog'
       prompt: 'Describe the "example-app" microservice in our Backstage catalog'
       category: Catalog
+
+devTools:
+  scheduledTasks:
+    plugins:
+      - catalog

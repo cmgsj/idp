@@ -76,4 +76,8 @@ backend.add(import('@backstage-community/plugin-mcp-chat-backend'));
 // announcements plugin
 backend.add(import('@backstage-community/plugin-announcements-backend'));
 
+// devtools plugin
+backend.add(import('@backstage/plugin-devtools-backend'));
+backend.add(import('@backstage/plugin-catalog-backend-module-unprocessed'));
+
 backend.start();
